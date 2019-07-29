@@ -1,0 +1,31 @@
+
+.mov {
+    display: block;
+}
+
+.mov ul {
+    list-style-type: none;
+    display: flex;
+
+}
+
+/* ul .title {
+    flex: 2;
+} */
+
+.allmovies ul {
+    list-style-type: none;
+    display: flex;
+}
+
+ul .general {
+    flex: 1;
+}
+
+ul .generals {
+    display: none;
+}
+
+.movs {
+    display: none;
+}
