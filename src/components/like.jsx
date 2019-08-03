@@ -1,6 +1,6 @@
 import React from "react";
 
-function Like (props) {
+const Like = (props) => {
     let classes = "fa fa-heart";
     if (!props.liked) classes += "-o";
     return (
@@ -11,6 +11,6 @@ function Like (props) {
         aria-hidden="true"
       />
     );
-}
+};
 
 export default Like;
