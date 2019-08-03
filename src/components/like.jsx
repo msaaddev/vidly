@@ -1,23 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Like extends Component {
-  state = {};
-
-  clickEvent() {
-    return <i class="fa fa-heart" aria-hidden="true" />;
-  }
-  render() {
+function Like (props) {
     let classes = "fa fa-heart";
-    if (!this.props.liked) classes += "-o";
+    if (!props.liked) classes += "-o";
     return (
       <i
         className={classes}
         style={{ cursor: "pointer" }}
-        onClick = {this.props.onClick}
+        onClick = {props.onClick}
         aria-hidden="true"
       />
     );
-  }
 }
 
 export default Like;
