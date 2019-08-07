@@ -11,7 +11,9 @@ class MoviesTable extends Component {
     { path: "dailyRentalRate", label: "Rate" },
     {
       key: "like",
-      content: movie => <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
+      content: movie => (
+        <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
+      )
     },
     {
       key: "delete",
@@ -26,7 +28,7 @@ class MoviesTable extends Component {
     }
   ];
   render() {
-    const { movies, onDelete, onLike, onSort, sortColumn } = this.props;
+    const { movies, onSort, sortColumn } = this.props;
     return (
       <table className="table">
         <TableHeader
@@ -35,7 +37,7 @@ class MoviesTable extends Component {
           onSort={onSort}
         />
         <TableBody columns={this.columns} data={movies} />
-       </table>
+      </table>
     );
   }
 }
