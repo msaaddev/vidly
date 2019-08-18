@@ -1,11 +1,13 @@
 import React from "react";
+import Movies from "../src/components/movies";
+import Nav from "../src/components/navigation";
 import "./App.css";
 
 function App() {
   return (
-    <main className = "container">
-      <h1>Hello World</h1>
-    </main>
+    <React.Fragment>
+      <Nav />
+    </React.Fragment>
   );
 }
 
