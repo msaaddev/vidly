@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react";  
 import _ from "lodash";
 
 const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
