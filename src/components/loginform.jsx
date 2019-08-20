@@ -14,11 +14,12 @@ class LoginForm extends Component {
 
   handleChange = e => {
     const account = { ...this.state.account }; // this will copy the state into account
-    account[e.currentTarget.name] = e.currentTarget.value; //this statement will then assign the inputed username to the account
+    account[e.currentTarget.name] = e.currentTarget.value; //this statement will dynamically assign the inputed username/password to the account
     this.setState({ account }); // this will then change the state of account
   };
 
   render() {
+    const { account } = this.state;
     return (
       <div>
         <h1>Login</h1>
@@ -26,7 +27,7 @@ class LoginForm extends Component {
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
-              value={this.state.account.username}
+              value={account.username}
               onChange={this.handleChange}
               name="username"
               id="username"
@@ -37,7 +38,7 @@ class LoginForm extends Component {
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
-              value={this.state.account.password}
+              value={account.password}
               onChange={this.handleChange}
               name="password"
               id="password"
