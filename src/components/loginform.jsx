@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
-  username = React.createRef();
+  state = {
+    account: { username: "", password: "" }
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -10,9 +12,11 @@ class LoginForm extends Component {
     console.log("Submitted");
   };
 
-  componentDidMount() {
-    this.username.current.focus();
-  }
+  handleChange = e => {
+    const account = { ...this.state.account }; // this will copy the state into account
+    account.username = e.currentTarget.value; //this statement will then assign the inputed username to the account
+    this.setState({ account }); // this will then change the state of account
+  };
 
   render() {
     return (
@@ -22,7 +26,8 @@ class LoginForm extends Component {
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
-              ref={this.username}
+              value={this.state.account.username}
+              onChange={this.handleChange}
               id="username"
               type="text"
               className="form-control"
