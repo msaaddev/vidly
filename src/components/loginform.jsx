@@ -3,11 +3,20 @@ import Input from "./input";
 
 class LoginForm extends Component {
   state = {
-    account: { username: "", password: "" }
+    account: { username: "", password: "" },
+    errors: {}
   };
+
+  validate = () => {
+    return {username: "Username is required"};
+  }
 
   handleSubmit = e => {
     e.preventDefault();
+
+    const errors = this.validate();
+    this.setState({ errors });
+    if (errors) return;
 
     // Call the server
     console.log("Submitted");
@@ -37,7 +46,6 @@ class LoginForm extends Component {
             value={account.password}
             onChange={this.handleChange}
           />
-
           <button className="btn btn-primary">Login</button>
         </form>
       </div>
