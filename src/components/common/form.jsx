@@ -46,6 +46,14 @@ class Form extends Component {
     data[e.currentTarget.name] = e.currentTarget.value; //this statement will dynamically assign the inputed username/password to the data
     this.setState({ data, errors }); // this will then change the state of data
   };
+
+  renderButton = label => {
+    return (
+      <button disabled={this.validate()} className="btn btn-primary">
+        {label}
+      </button>
+    );
+  };
 }
 
 export default Form;
