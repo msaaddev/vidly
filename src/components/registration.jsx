@@ -8,16 +8,34 @@ class RegistrationForm extends Component {
   };
 
   schema = {
-    username: Joi.string().email().required(),
-    password: Joi.string().alphanum().min(5).required(),
+    username: Joi.string()
+      .email()
+      .required(),
+    password: Joi.string()
+      .alphanum()
+      .min(5)
+      .required(),
     nameOfUser: Joi.string().required()
+  };
+
+  validate = () => {
+    const option = { abortEarly: false };
+    const { error } = Joi.validate(this.state.data, this.schema, option);
+    if (!error) return null;
+
+    const errors = {};
+
+    for (let item of error.details) errors[item.path[0]] = item.message;
+    return errors;
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const option = { abortEarly: false };
-    const errors = Joi.validate(this.state.data, this.schema, option);
-    if (!errors) return null;
+
+    const errors = this.validate();
+    this.setState({ errors });
+    console.log(this.state.errors);
+    if (errors) return;
   };
 
   handleChange = e => {
@@ -41,7 +59,13 @@ class RegistrationForm extends Component {
               onChange={this.handleChange}
               className="form-control"
             />
+            {this.state.errors && (
+              <div className="alert alert-danger">
+                {this.state.errors.username}
+              </div>
+            )}
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
