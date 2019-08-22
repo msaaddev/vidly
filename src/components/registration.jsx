@@ -7,20 +7,23 @@ class RegistrationForm extends Component {
     errors: {}
   };
 
+  schema = {
+    username: Joi.string().email().required(),
+    password: Joi.string().alphanum().min(5).required(),
+    nameOfUser: Joi.string().required()
+  };
+
   handleSubmit = e => {
     e.preventDefault();
+    const option = { abortEarly: false };
+    const errors = Joi.validate(this.state.data, this.schema, option);
+    if (!errors) return null;
   };
 
   handleChange = e => {
     const data = { ...this.state.data };
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ data });
-  };
-
-  schema = {
-    username: Joi.email().required(),
-    password: Joi.min(5).required(),
-    nameOfUser: Joi.string().required()
   };
 
   render() {
