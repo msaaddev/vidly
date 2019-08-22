@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import Joi from "joi-browser";
 
 class RegistrationForm extends Component {
   state = {
-    data: { username: "", password: "", nameOfUser: "" }
+    data: { username: "", password: "", nameOfUser: "" },
+    errors: {}
   };
 
   handleSubmit = e => {
@@ -12,7 +14,13 @@ class RegistrationForm extends Component {
   handleChange = e => {
     const data = { ...this.state.data };
     data[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ data    });
+    this.setState({ data });
+  };
+
+  schema = {
+    username: Joi.email().required(),
+    password: Joi.min(5).required(),
+    nameOfUser: Joi.string().required()
   };
 
   render() {
