@@ -10,7 +10,7 @@ class NewMovie extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.validateProperty();
+    this.validate();
   };
 
   handleChange = e => {
@@ -32,7 +32,7 @@ class NewMovie extends Component {
       .max(10)
   };
 
-  validateProperty = e => {
+  validate = e => {
     const options = { abortEarly: false };
     const result = Joi.validate(this.state.data, this.schema, options);
     console.log(result);
