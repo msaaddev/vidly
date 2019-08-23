@@ -10,7 +10,8 @@ class NewMovie extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.validate();
+    const errors = this.validate();
+    this.setState({errors: errors || {}})
   };
 
   handleChange = e => {
@@ -32,10 +33,19 @@ class NewMovie extends Component {
       .max(10)
   };
 
-  validate = e => {
+  validate = () => {
     const options = { abortEarly: false };
     const result = Joi.validate(this.state.data, this.schema, options);
+    const { error } = Joi.validate(this.state.data, this.schema, options);
     console.log(result);
+
+    if (!error) return null;
+
+    const errors = {};
+
+    for (let item of error.details) errors[item.path[0]] = item.message;
+    console.log(errors);
+    return errors;
   };
 
   render() {
