@@ -68,22 +68,13 @@ class NewMovie extends Component {
             label="Title"
             onChange={this.handleChange}
           />
-          <div className="form-group">
-            <label htmlFor="genre">Genre</label>
-            <select
-              name="genre"
-              value={data.genre}
-              id="genre"
-              type="text"
-              className="form-control"
-              onChange={this.handleChange}
-            >
-              <option />
-              <option>Action</option>
-              <option>Comedy</option>
-              <option>Thriller</option>
-            </select>
-          </div>
+          <MovieInput
+            tag="select"
+            data={data}
+            name="genre"
+            label="Genre"
+            onChange={this.handleChange}
+          />
           <MovieInput
             data={data}
             name="noOfStock"
