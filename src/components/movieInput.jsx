@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieInput = ({ data, onChange, name, label, tag }) => {
+const MovieInput = ({ data, onChange, name, label, tag, error }) => {
   return (
     <React.Fragment>
       {(tag && (
@@ -19,6 +19,7 @@ const MovieInput = ({ data, onChange, name, label, tag }) => {
             <option>Comedy</option>
             <option>Thriller</option>
           </select>
+          {error && <div className="alert alert-danger">{error}</div>}
         </div>
       )) || (
         <div className="form-group">
@@ -31,6 +32,7 @@ const MovieInput = ({ data, onChange, name, label, tag }) => {
             className="form-control"
             onChange={onChange}
           />
+          {error && <div className="alert alert-danger">{error}</div>}
         </div>
       )}
     </React.Fragment>

@@ -1,93 +1,37 @@
 import React, { Component } from "react";
-import MovieInput from "./movieInput";
 import Joi from "joi-browser";
+import MovieInput from "./movieInput";
+import NewMovieFrom from "./newMovieForm";
 
-class NewMovie extends Component {
+class NewMovie extends NewMovieFrom {
   state = {
     data: { title: "", genre: "", noOfStock: "", rate: "" },
     errors: {}
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const errors = this.validate();
-    this.setState({ errors: errors || {} });
-  };
-
-  handleChange = e => {
-    this.validateProperty(e);
-    const data = { ...this.state.data };
-    data[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ data });
-  };
-
   schema = {
-    title: Joi.string().required(),
-    genre: Joi.string().required(),
+    title: Joi.string().required().label("Title"),
+    genre: Joi.string().required().label("Genre"),
     noOfStock: Joi.number()
       .required()
       .min(0)
-      .max(100),
+      .max(100).label("Number in Stock"),
     rate: Joi.number()
       .required()
       .min(0)
-      .max(10)
-  };
-
-  validate = () => {
-    const options = { abortEarly: false };
-    const { error } = Joi.validate(this.state.data, this.schema, options);
-
-    if (!error) return null;
-
-    const errors = {};
-
-    for (let item of error.details) errors[item.path[0]] = item.message;
-    console.log(errors);
-    return errors;
-  };
-
-  validateProperty = e => {
-    const { error } = Joi.validate(
-      this.state.data[e.currentTarget.name],
-      this.schema[e.currentTarget.name]
-    );
-    return error ? error.details[0].message : null;
+      .max(10).label("Rate")
   };
 
   render() {
-    const { data } = this.state;
     return (
       <div>
         <h1>Movie Form</h1>
         <form onSubmit={this.handleSubmit}>
-          ‏
-          <MovieInput
-            data={data}
-            name="title"
-            label="Title"
-            onChange={this.handleChange}
-          />
-          <MovieInput
-            tag="select"
-            data={data}
-            name="genre"
-            label="Genre"
-            onChange={this.handleChange}
-          />
-          <MovieInput
-            data={data}
-            name="noOfStock"
-            label="Number in Stock"
-            onChange={this.handleChange}
-          />
-          <MovieInput
-            data={data}
-            name="rate"
-            label="Rate"
-            onChange={this.handleChange}
-          />
-          <button className="btn btn-primary">Save</button>
+          {this.renderMovieInput("title", "Title")}
+          {this.renderMovieInput("genre", "Genre", "select")}
+          {this.renderMovieInput("noOfStock", "Number in Stock")}
+          {this.renderMovieInput("rate", "Rate")}
+          {this.renderButton("Save")}
         </form>
       </div>
     );
