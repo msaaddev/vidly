@@ -4,6 +4,13 @@ class NewMovie extends Component {
   state = {
     data: { title: "", genre: "", noOfStock: "", rate: "" }
   };
+
+  handleChange = e => {
+    const data = { ...this.state.data };
+    data[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ data });
+  };
+
   render() {
     const { data } = this.state;
     return (
@@ -17,6 +24,7 @@ class NewMovie extends Component {
             id="title"
             type="text"
             className="form-control"
+            onChange={this.handleChange}
           />
         </div>
         <div className="form-group">
@@ -27,6 +35,7 @@ class NewMovie extends Component {
             id="genre"
             type="text"
             className="form-control"
+            onChange={this.handleChange}
           >
             <option />
             <option>Action</option>
@@ -42,6 +51,7 @@ class NewMovie extends Component {
             id="noOfStock"
             type="text"
             className="form-control"
+            onChange={this.handleChange}
           />
         </div>
         <div className="form-group">
@@ -52,8 +62,10 @@ class NewMovie extends Component {
             id="rate"
             type="text"
             className="form-control"
+            onChange={this.handleChange}
           />
         </div>
+        <button className="btn btn-primary">Save</button>
       </div>
     );
   }
