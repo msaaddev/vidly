@@ -11,10 +11,11 @@ class NewMovie extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const errors = this.validate();
-    this.setState({errors: errors || {}})
+    this.setState({ errors: errors || {} });
   };
 
   handleChange = e => {
+    this.validateProperty(e);
     const data = { ...this.state.data };
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ data });
@@ -35,9 +36,7 @@ class NewMovie extends Component {
 
   validate = () => {
     const options = { abortEarly: false };
-    const result = Joi.validate(this.state.data, this.schema, options);
     const { error } = Joi.validate(this.state.data, this.schema, options);
-    console.log(result);
 
     if (!error) return null;
 
@@ -46,6 +45,14 @@ class NewMovie extends Component {
     for (let item of error.details) errors[item.path[0]] = item.message;
     console.log(errors);
     return errors;
+  };
+
+  validateProperty = e => {
+    const { error } = Joi.validate(
+      this.state.data[e.currentTarget.name],
+      this.schema[e.currentTarget.name]
+    );
+    return error ? error.details[0].message : null;
   };
 
   render() {
