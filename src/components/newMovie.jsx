@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import MovieInput from "./movieInput";
 
 class NewMovie extends Component {
   state = {
     data: { title: "", genre: "", noOfStock: "", rate: "" }
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
   };
 
   handleChange = e => {
@@ -16,56 +21,44 @@ class NewMovie extends Component {
     return (
       <div>
         <h1>Movie Form</h1>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
+        <form onSubmit={this.handleSubmit}>
+          ‏
+          <MovieInput
+            data={data}
             name="title"
-            value={data.title}
-            id="title"
-            type="text"
-            className="form-control"
+            label="Title"
             onChange={this.handleChange}
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="genre">Genre</label>
-          <select
-            name="genre"
-            value={data.genre}
-            id="genre"
-            type="text"
-            className="form-control"
-            onChange={this.handleChange}
-          >
-            <option />
-            <option>Action</option>
-            <option>Comedy</option>
-            <option>Thriller</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="noOfStock">Number in Stock</label>
-          <input
+          <div className="form-group">
+            <label htmlFor="genre">Genre</label>
+            <select
+              name="genre"
+              value={data.genre}
+              id="genre"
+              type="text"
+              className="form-control"
+              onChange={this.handleChange}
+            >
+              <option />
+              <option>Action</option>
+              <option>Comedy</option>
+              <option>Thriller</option>
+            </select>
+          </div>
+          <MovieInput
+            data={data}
             name="noOfStock"
-            value={data.noOfStock}
-            id="noOfStock"
-            type="text"
-            className="form-control"
+            label="Number in Stock"
             onChange={this.handleChange}
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="rate">Rate</label>
-          <input
+          <MovieInput
+            data={data}
             name="rate"
-            value={data.rate}
-            id="rate"
-            type="text"
-            className="form-control"
+            label="Rate"
             onChange={this.handleChange}
           />
-        </div>
-        <button className="btn btn-primary">Save</button>
+          <button className="btn btn-primary">Save</button>
+        </form>
       </div>
     );
   }
