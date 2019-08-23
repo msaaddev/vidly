@@ -1,19 +1,41 @@
 import React, { Component } from "react";
 import MovieInput from "./movieInput";
+import Joi from "joi-browser";
 
 class NewMovie extends Component {
   state = {
-    data: { title: "", genre: "", noOfStock: "", rate: "" }
+    data: { title: "", genre: "", noOfStock: "", rate: "" },
+    errors: {}
   };
 
   handleSubmit = e => {
     e.preventDefault();
+    this.validateProperty();
   };
 
   handleChange = e => {
     const data = { ...this.state.data };
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ data });
+  };
+
+  schema = {
+    title: Joi.string().required(),
+    genre: Joi.string().required(),
+    noOfStock: Joi.number()
+      .required()
+      .min(0)
+      .max(100),
+    rate: Joi.number()
+      .required()
+      .min(0)
+      .max(10)
+  };
+
+  validateProperty = e => {
+    const options = { abortEarly: false };
+    const result = Joi.validate(this.state.data, this.schema, options);
+    console.log(result);
   };
 
   render() {
