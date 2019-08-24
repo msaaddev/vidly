@@ -20,7 +20,7 @@ function App() {
           <Route path="/movies/new" component={NewMovie} />
           <Route path="/registration" component={RegistrationForm} />
           <Route path="/login" component={LoginForm} />
-          <Route path="/movies/:id" component={MovieForm} />
+          <Route path="/movies/:id" component={NewMovie} />
           <Route path="/customers" component={Customers} />
           <Route path="/rentals" component={Rentals} />
           <Route path="/movies" component={Movies} />
