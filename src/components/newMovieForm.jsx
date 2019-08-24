@@ -57,9 +57,9 @@ class NewMovieFrom extends Component {
     );
   };
 
-  renderButton = label => {
+  renderButton = (label, func) => {
     return (
-      <button disabled={this.validate()} className="btn btn-primary">
+      <button onClick={func} disabled={this.validate()} className="btn btn-primary">
         {label}
       </button>
     );

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import MovieInput from "./movieInput";
 import NewMovieFrom from "./newMovieForm";
 
 class NewMovie extends NewMovieFrom {
