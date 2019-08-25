@@ -91,7 +91,7 @@ class Movies extends Component {
             <Link to="/movies/new">
               <button type="button" class="btn btn-primary mb-2">
                 New Movie
-              </button>
+
             </Link>
             <p>Showing {totalCount} movies in the database.</p>
             <MoviesTable
