@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import MovieInput from "./movieInput";
 
-class NewMovieFrom extends Component {
+class NewMovieForm extends Component {
   state = {
     data: {},
     errors: {}
@@ -66,4 +66,4 @@ class NewMovieFrom extends Component {
   };
 }
 
-export default NewMovieFrom;
+export default NewMovieForm;

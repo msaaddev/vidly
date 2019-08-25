@@ -1,34 +1,53 @@
 import React from "react";
 import Joi from "joi-browser";
-import NewMovieFrom from "./newMovieForm";
-import { getMovies } from "../services/fakeMovieService";
+import NewMovieForm from "./newMovieForm";
+import { getMovies, getMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 
-class EditMovie extends NewMovieFrom {
+class EditMovie extends NewMovieForm {
   state = {
-    data: { title: "", genre: "", noOfStock: "", rate: "" },
-    errors: {},
-    movies: []
+    data: { title: "", genreId: "", numberInStock: "", dailyRentalRate: "" },
+    genres: [],
+    errors: {}
   };
 
   componentDidMount() {
-    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
-    this.setState({ movies: getMovies(), genres });
+    const genres = getGenres();
+    this.setState({ genres });
+
+    const movieId = this.props.match.params.id;
+    if (movieId === "new") return;
+
+    const movie = getMovie(movieId);
+    if (!movie) return this.props.history.replace("/not-found");
+
+    this.setState({ data: this.mapToViewModel(movie) });
   }
 
+  mapToViewModel = movie => {
+    return {
+      _id: movie._id,
+      title: movie.title,
+      genreId: movie.genre._id,
+      numberInStock: movie.numberInStock,
+      dailyRentalRate: movie.dailyRentalRate
+    };
+  };
+
   schema = {
+    _id: Joi.string(),
     title: Joi.string()
       .required()
       .label("Title"),
-    genre: Joi.string()
+    genreId: Joi.string()
       .required()
       .label("Genre"),
-    noOfStock: Joi.number()
+    numberInStock: Joi.number()
       .required()
       .min(0)
       .max(100)
       .label("Number in Stock"),
-    rate: Joi.number()
+    dailyRentalRate: Joi.number()
       .required()
       .min(0)
       .max(10)

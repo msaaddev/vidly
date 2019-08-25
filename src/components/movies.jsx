@@ -88,8 +88,8 @@ class Movies extends Component {
           </div>
 
           <div className="col">
-            <Link to="/movies/new">
-              <button type="button" class="btn btn-primary mb-2">
+            <Link to="/movies/new" class="btn btn-primary mb-2">
+
                 New Movie
 
             </Link>
