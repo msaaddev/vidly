@@ -7,6 +7,7 @@ import MoviesTable from "../components/moviesTable";
 import { paginate } from "../utils/paginate";
 import ListGroup from "../components/listGroup";
 import _ from "lodash";
+import SearchBox from "./searchBox";
 
 class Movies extends Component {
   state = {
@@ -102,6 +103,10 @@ class Movies extends Component {
               New Movie
             </Link>
             <p>Showing {totalCount} movies in the database.</p>
+            <SearchBox
+              value={this.state.searchQuery}
+              onChange={this.handleSearch}
+            />
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}
