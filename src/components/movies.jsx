@@ -43,6 +43,10 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
+  handleSearch = query => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
+  };
+
   handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
@@ -89,9 +93,7 @@ class Movies extends Component {
 
           <div className="col">
             <Link to="/movies/new" class="btn btn-primary mb-2">
-
-                New Movie
-
+              New Movie
             </Link>
             <p>Showing {totalCount} movies in the database.</p>
             <MoviesTable

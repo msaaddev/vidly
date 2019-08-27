@@ -12,6 +12,8 @@ class NewMovieForm extends Component {
     e.preventDefault();
     const errors = this.validate();
     this.setState({ errors: errors || {} });
+
+    this.doSubmit();
   };
 
   handleChange = e => {

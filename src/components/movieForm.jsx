@@ -1,7 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import NewMovieForm from "./newMovieForm";
-import { getMovies, getMovie } from "../services/fakeMovieService";
+import { getMovie, saveMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 
 class EditMovie extends NewMovieForm {
@@ -32,6 +32,11 @@ class EditMovie extends NewMovieForm {
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate
     };
+  };
+
+  doSubmit = () => {
+    saveMovie(this.state.data);
+    this.props.history.push("/movies");
   };
 
   schema = {
