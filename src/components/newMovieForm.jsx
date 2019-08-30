@@ -61,7 +61,11 @@ class NewMovieForm extends Component {
 
   renderButton = (label, func) => {
     return (
-      <button onClick={func} disabled={this.validate()} className="btn btn-primary">
+      <button
+        onClick={func}
+        disabled={this.validate()}
+        className="btn btn-primary"
+      >
         {label}
       </button>
     );
