@@ -11,20 +11,26 @@ class EditMovie extends NewMovieForm {
     errors: {}
   };
 
-  async componentDidMount() {
+  populateGenre = async () => {
     const { data: genres } = await getGenres();
     this.setState({ genres });
+  };
 
-    const movieId = this.props.match.params.id;
-    if (movieId === "new") return;
-
+  populateMovie = async () => {
     try {
+      const movieId = this.props.match.params.id;
+      if (movieId === "new") return;
       const { data: movie } = await getMovie(movieId);
       this.setState({ data: this.mapToViewModel(movie) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         this.props.history.replace("/not-found");
     }
+  };
+
+  async componentDidMount() {
+    await this.populateGenre();
+    await this.populateMovie();
   }
 
   mapToViewModel = movie => {
