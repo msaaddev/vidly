@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import Movies from "../src/components/movies";
 import NavBar from "../src/components/navBar";
 import Customers from "../src/components/customers";
@@ -13,27 +14,38 @@ import NewMovie from "./components/newMovie";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-function App() {
-  return (
-    <React.Fragment>
-      <NavBar />
-      <ToastContainer />
-      <main className="container">
-        <Switch>
-          <Route path="/movies/new" component={NewMovie} />
-          <Route path="/registration" component={RegistrationForm} />
-          <Route path="/login" component={LoginForm} />
-          <Route path="/movies/:id" component={EditMovie} />
-          <Route path="/customers" component={Customers} />
-          <Route path="/rentals" component={Rentals} />
-          <Route path="/movies" component={Movies} />
-          <Route path="/not-found" component={NotFound} />
-          <Redirect from="/" exact to="/movies" />
-          <Redirect to="/not-found" />
-        </Switch>
-      </main>
-    </React.Fragment>
-  );
+class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    try {
+      const jwt = localStorage.getItem("token");
+      const user = jwtDecode(jwt);
+      this.setState({ user });
+    } catch (error) {}
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar user={this.state.user} />
+        <ToastContainer />
+        <main className="container">
+          <Switch>
+            <Route path="/movies/new" component={NewMovie} />
+            <Route path="/registration" component={RegistrationForm} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/movies/:id" component={EditMovie} />
+            <Route path="/customers" component={Customers} />
+            <Route path="/rentals" component={Rentals} />
+            <Route path="/movies" component={Movies} />
+            <Route path="/not-found" component={NotFound} />
+            <Redirect from="/" exact to="/movies" />
+            <Redirect to="/not-found" />
+          </Switch>
+        </main>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
