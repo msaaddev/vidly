@@ -19,12 +19,11 @@ class LoginForm extends Form {
   };
 
   doSubmit = async () => {
-    // Call the server
     try {
       const { data } = this.state;
       const { data: jwt } = await login(data.username, data.password);
       localStorage.setItem("token", jwt);
-      this.props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.state === 400) {
         const errors = { ...this.state.errors };
