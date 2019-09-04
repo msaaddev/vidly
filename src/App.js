@@ -11,6 +11,7 @@ import EditMovie from "./components/movieForm";
 import RegistrationForm from "./components/registration";
 import NewMovie from "./components/newMovie";
 import Logout from "./components/logout";
+import ProtectedRoute from './components/common/protectedRoute';
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -29,11 +30,11 @@ class App extends Component {
         <ToastContainer />
         <main className="container">
           <Switch>
-            <Route path="/movies/new" component={NewMovie} />
+            <ProtectedRoute path="/movies/new" component={NewMovie} />
             <Route path="/registration" component={RegistrationForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
-            <Route path="/movies/:id" component={EditMovie} />
+            <ProtectedRoute path="/movies/:id" component={EditMovie} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route
