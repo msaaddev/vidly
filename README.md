@@ -1,1 +1,1 @@
-A React based movie app. Currently in development 🏗
+An application for movie enthusiasts.
